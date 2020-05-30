@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+option csharp_namespace = "Generated";
+
+message LogInRequest
+{
+	string name = 1;
+	bool active = 2;
+}

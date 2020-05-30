@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+option csharp_namespace = "Generated";
+
+message ChatRequest
+{
+	string name = 1;
+	string textmessage = 2;
+}

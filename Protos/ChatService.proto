@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+import "LogInRequest.proto";
+import "Close.proto";
+
+import "ChatRequest.proto";
+import "ChatResponse.proto";
+
+option csharp_namespace = "Generated";
+
+service ChatService {
+	rpc logIn(LogInRequest) returns (Close);
+	rpc chatStream(ChatRequest) returns (stream ChatRequest);
+	rpc sendMessage(ChatRequest) returns (Close);
+}

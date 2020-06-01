@@ -26,10 +26,11 @@ namespace Generated {
           string.Concat(
             "ChFDaGF0U2VydmljZS5wcm90bxoSTG9nSW5SZXF1ZXN0LnByb3RvGgtDbG9z",
             "ZS5wcm90bxoRQ2hhdFJlcXVlc3QucHJvdG8aEkNoYXRSZXNwb25zZS5wcm90",
-            "bzJ+CgtDaGF0U2VydmljZRIeCgVsb2dJbhINLkxvZ0luUmVxdWVzdBoGLkNs",
-            "b3NlEioKCmNoYXRTdHJlYW0SDC5DaGF0UmVxdWVzdBoMLkNoYXRSZXF1ZXN0",
-            "MAESIwoLc2VuZE1lc3NhZ2USDC5DaGF0UmVxdWVzdBoGLkNsb3NlQgyqAglH",
-            "ZW5lcmF0ZWRiBnByb3RvMw=="));
+            "bzKfAQoLQ2hhdFNlcnZpY2USHgoFbG9nSW4SDS5Mb2dJblJlcXVlc3QaBi5D",
+            "bG9zZRIfCgZsb2dPdXQSDS5Mb2dJblJlcXVlc3QaBi5DbG9zZRIqCgpjaGF0",
+            "U3RyZWFtEgwuQ2hhdFJlcXVlc3QaDC5DaGF0UmVxdWVzdDABEiMKC3NlbmRN",
+            "ZXNzYWdlEgwuQ2hhdFJlcXVlc3QaBi5DbG9zZUIMqgIJR2VuZXJhdGVkYgZw",
+            "cm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Generated.LogInRequestReflection.Descriptor, global::Generated.CloseReflection.Descriptor, global::Generated.ChatRequestReflection.Descriptor, global::Generated.ChatResponseReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, null));

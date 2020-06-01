@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -32,12 +33,18 @@ namespace Chat
         ChatRequest clientMessage = new ChatRequest();
 
         bool isConnected = false;
+        bool isUpdateed = FALS;
 
         public MainWindow()
         {
             InitializeComponent();
         }
 
+        void DataWindow_Closing(object sender, CancelEventArgs e)
+        {
+            var logIn = new ChatService.ChatServiceClient(channel);
+            logIn.logOut(client);
+        }
         private void AppendLineToChatBox(string message)
         {
             chatbox.Dispatcher.BeginInvoke(new Action<string>((messageToAdd) =>
@@ -48,8 +55,6 @@ namespace Chat
         }
         private async Task UpdateChat()
         {
-            chatbox.Clear();
-
             var chat = new ChatService.ChatServiceClient(channel);
             var stream = chat.chatStream(clientMessage);
 
@@ -63,7 +68,6 @@ namespace Chat
 
                 AppendLineToChatBox(message);
             }
-
         }
 
         ///------------------> Buttons <------------------//////
@@ -87,6 +91,12 @@ namespace Chat
                     //chat.Subscribe();
 
                     isConnected = true;
+
+                    string message;
+
+                    message = "You are now Connected! Welcome " + client.Name + "!";
+                    lb_connectBool.Content = message;
+                    lb_connectBool.Foreground = new SolidColorBrush(Colors.Green);
                 }
             }
         }
@@ -107,17 +117,25 @@ namespace Chat
                     chat.sendMessage(clientMessage);
 
                     UpdateChat();
+                    isUpdateed = false;
                 }
             }
 
         }
 
-        ///------------------> TextBox <------------------//////
+        ///------------------> Utils <------------------//////
 
         private void txt_message_TextChanged(object sender, TextChangedEventArgs e)
         {
-            UpdateChat();
+            if (isConnected == false)
+                MessageBox.Show("Ups! You forgot to connect!", "Error!");
+            else if (isUpdateed == false)
+            {
+                UpdateChat();
+                isUpdateed = true;
+            }
         }
+
 
     }
 }

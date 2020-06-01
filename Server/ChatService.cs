@@ -19,6 +19,15 @@ namespace Server
             observers.Add(request);
             return Task.FromResult(new Close());
         }
+        public override Task<Close> logOut(LogInRequest request, ServerCallContext context)
+        {
+            Console.WriteLine("\n--> " + request.Name + " has logged out! <--");
+
+            //observers.Add(request);
+            return Task.FromResult(new Close());
+        }
+    
+
         public override async Task chatStream(ChatRequest request, IServerStreamWriter<ChatRequest> responseStream, ServerCallContext context)
         {
             foreach (var message in requestMessages)
@@ -32,12 +41,12 @@ namespace Server
             Console.WriteLine(request.Name + " send a message!");
             Console.WriteLine("------------------------------------");
 
+            requestMessages.Clear();
             requestMessages.Add(request);
             //this.Notify();
 
             return Task.FromResult(new Close());
         }
-
     }
 }
 

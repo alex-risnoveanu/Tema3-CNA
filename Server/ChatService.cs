@@ -10,23 +10,6 @@ namespace Server
     internal class ChatService : Generated.ChatService.ChatServiceBase
     {
         private static List<ChatRequest> requestMessages = new List<ChatRequest>();
-        private static List<LogInRequest> observers = new List<LogInRequest>();
-
-        public override Task<Close> logIn(LogInRequest request, ServerCallContext context)
-        {
-            Console.WriteLine("\n--> " + request.Name + " has logged in! <--");
-
-            observers.Add(request);
-            return Task.FromResult(new Close());
-        }
-        public override Task<Close> logOut(LogInRequest request, ServerCallContext context)
-        {
-            Console.WriteLine("\n--> " + request.Name + " has logged out! <--");
-
-            //observers.Add(request);
-            return Task.FromResult(new Close());
-        }
-    
 
         public override async Task chatStream(ChatRequest request, IServerStreamWriter<ChatRequest> responseStream, ServerCallContext context)
         {

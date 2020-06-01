@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+import "LogInRequest.proto";
+import "Close.proto";
+
+option csharp_namespace = "Generated";
+
+service LogInService {
+	rpc logIn(LogInRequest) returns (Close);
+	rpc logOut(LogInRequest) returns (Close);
+}

@@ -12,23 +12,8 @@ namespace Generated {
   {
     static readonly string __ServiceName = "ChatService";
 
-    static readonly grpc::Marshaller<global::Generated.LogInRequest> __Marshaller_LogInRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Generated.LogInRequest.Parser.ParseFrom);
-    static readonly grpc::Marshaller<global::Generated.Close> __Marshaller_Close = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Generated.Close.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Generated.ChatRequest> __Marshaller_ChatRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Generated.ChatRequest.Parser.ParseFrom);
-
-    static readonly grpc::Method<global::Generated.LogInRequest, global::Generated.Close> __Method_logIn = new grpc::Method<global::Generated.LogInRequest, global::Generated.Close>(
-        grpc::MethodType.Unary,
-        __ServiceName,
-        "logIn",
-        __Marshaller_LogInRequest,
-        __Marshaller_Close);
-
-    static readonly grpc::Method<global::Generated.LogInRequest, global::Generated.Close> __Method_logOut = new grpc::Method<global::Generated.LogInRequest, global::Generated.Close>(
-        grpc::MethodType.Unary,
-        __ServiceName,
-        "logOut",
-        __Marshaller_LogInRequest,
-        __Marshaller_Close);
+    static readonly grpc::Marshaller<global::Generated.Close> __Marshaller_Close = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Generated.Close.Parser.ParseFrom);
 
     static readonly grpc::Method<global::Generated.ChatRequest, global::Generated.ChatRequest> __Method_chatStream = new grpc::Method<global::Generated.ChatRequest, global::Generated.ChatRequest>(
         grpc::MethodType.ServerStreaming,
@@ -54,16 +39,6 @@ namespace Generated {
     [grpc::BindServiceMethod(typeof(ChatService), "BindService")]
     public abstract partial class ChatServiceBase
     {
-      public virtual global::System.Threading.Tasks.Task<global::Generated.Close> logIn(global::Generated.LogInRequest request, grpc::ServerCallContext context)
-      {
-        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
-      }
-
-      public virtual global::System.Threading.Tasks.Task<global::Generated.Close> logOut(global::Generated.LogInRequest request, grpc::ServerCallContext context)
-      {
-        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
-      }
-
       public virtual global::System.Threading.Tasks.Task chatStream(global::Generated.ChatRequest request, grpc::IServerStreamWriter<global::Generated.ChatRequest> responseStream, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
@@ -99,38 +74,6 @@ namespace Generated {
       {
       }
 
-      public virtual global::Generated.Close logIn(global::Generated.LogInRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
-      {
-        return logIn(request, new grpc::CallOptions(headers, deadline, cancellationToken));
-      }
-      public virtual global::Generated.Close logIn(global::Generated.LogInRequest request, grpc::CallOptions options)
-      {
-        return CallInvoker.BlockingUnaryCall(__Method_logIn, null, options, request);
-      }
-      public virtual grpc::AsyncUnaryCall<global::Generated.Close> logInAsync(global::Generated.LogInRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
-      {
-        return logInAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
-      }
-      public virtual grpc::AsyncUnaryCall<global::Generated.Close> logInAsync(global::Generated.LogInRequest request, grpc::CallOptions options)
-      {
-        return CallInvoker.AsyncUnaryCall(__Method_logIn, null, options, request);
-      }
-      public virtual global::Generated.Close logOut(global::Generated.LogInRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
-      {
-        return logOut(request, new grpc::CallOptions(headers, deadline, cancellationToken));
-      }
-      public virtual global::Generated.Close logOut(global::Generated.LogInRequest request, grpc::CallOptions options)
-      {
-        return CallInvoker.BlockingUnaryCall(__Method_logOut, null, options, request);
-      }
-      public virtual grpc::AsyncUnaryCall<global::Generated.Close> logOutAsync(global::Generated.LogInRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
-      {
-        return logOutAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
-      }
-      public virtual grpc::AsyncUnaryCall<global::Generated.Close> logOutAsync(global::Generated.LogInRequest request, grpc::CallOptions options)
-      {
-        return CallInvoker.AsyncUnaryCall(__Method_logOut, null, options, request);
-      }
       public virtual grpc::AsyncServerStreamingCall<global::Generated.ChatRequest> chatStream(global::Generated.ChatRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return chatStream(request, new grpc::CallOptions(headers, deadline, cancellationToken));
@@ -167,8 +110,6 @@ namespace Generated {
     public static grpc::ServerServiceDefinition BindService(ChatServiceBase serviceImpl)
     {
       return grpc::ServerServiceDefinition.CreateBuilder()
-          .AddMethod(__Method_logIn, serviceImpl.logIn)
-          .AddMethod(__Method_logOut, serviceImpl.logOut)
           .AddMethod(__Method_chatStream, serviceImpl.chatStream)
           .AddMethod(__Method_sendMessage, serviceImpl.sendMessage).Build();
     }
@@ -179,8 +120,6 @@ namespace Generated {
     /// <param name="serviceImpl">An object implementing the server-side handling logic.</param>
     public static void BindService(grpc::ServiceBinderBase serviceBinder, ChatServiceBase serviceImpl)
     {
-      serviceBinder.AddMethod(__Method_logIn, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Generated.LogInRequest, global::Generated.Close>(serviceImpl.logIn));
-      serviceBinder.AddMethod(__Method_logOut, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Generated.LogInRequest, global::Generated.Close>(serviceImpl.logOut));
       serviceBinder.AddMethod(__Method_chatStream, serviceImpl == null ? null : new grpc::ServerStreamingServerMethod<global::Generated.ChatRequest, global::Generated.ChatRequest>(serviceImpl.chatStream));
       serviceBinder.AddMethod(__Method_sendMessage, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Generated.ChatRequest, global::Generated.Close>(serviceImpl.sendMessage));
     }

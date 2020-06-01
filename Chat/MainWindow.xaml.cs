@@ -41,7 +41,7 @@ namespace Chat
 
         void DataWindow_Closing(object sender, CancelEventArgs e)
         {
-            var logIn = new ChatService.ChatServiceClient(channel);
+            var logIn = new LogInService.LogInServiceClient(channel);
             logIn.logOut(client);
         }
         private void AppendLineToChatBox(string message)
@@ -85,7 +85,7 @@ namespace Chat
                 else
                 {
                     client.Name = txt_name.Text.ToString();
-                    var logIn = new ChatService.ChatServiceClient(channel);
+                    var logIn = new LogInService.LogInServiceClient(channel);
                     logIn.logIn(client);
 
                     //ChatService chat = new ChatService();

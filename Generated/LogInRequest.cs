@@ -24,12 +24,12 @@ namespace Generated {
     static LogInRequestReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "ChJMb2dJblJlcXVlc3QucHJvdG8iLAoMTG9nSW5SZXF1ZXN0EgwKBG5hbWUY",
-            "ASABKAkSDgoGYWN0aXZlGAIgASgIQgyqAglHZW5lcmF0ZWRiBnByb3RvMw=="));
+            "ChJMb2dJblJlcXVlc3QucHJvdG8iHAoMTG9nSW5SZXF1ZXN0EgwKBG5hbWUY",
+            "ASABKAlCDKoCCUdlbmVyYXRlZGIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::Generated.LogInRequest), global::Generated.LogInRequest.Parser, new[]{ "Name", "Active" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::Generated.LogInRequest), global::Generated.LogInRequest.Parser, new[]{ "Name" }, null, null, null, null)
           }));
     }
     #endregion
@@ -62,7 +62,6 @@ namespace Generated {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public LogInRequest(LogInRequest other) : this() {
       name_ = other.name_;
-      active_ = other.active_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -82,17 +81,6 @@ namespace Generated {
       }
     }
 
-    /// <summary>Field number for the "active" field.</summary>
-    public const int ActiveFieldNumber = 2;
-    private bool active_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Active {
-      get { return active_; }
-      set {
-        active_ = value;
-      }
-    }
-
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as LogInRequest);
@@ -107,7 +95,6 @@ namespace Generated {
         return true;
       }
       if (Name != other.Name) return false;
-      if (Active != other.Active) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -115,7 +102,6 @@ namespace Generated {
     public override int GetHashCode() {
       int hash = 1;
       if (Name.Length != 0) hash ^= Name.GetHashCode();
-      if (Active != false) hash ^= Active.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -133,10 +119,6 @@ namespace Generated {
         output.WriteRawTag(10);
         output.WriteString(Name);
       }
-      if (Active != false) {
-        output.WriteRawTag(16);
-        output.WriteBool(Active);
-      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -147,9 +129,6 @@ namespace Generated {
       int size = 0;
       if (Name.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Name);
-      }
-      if (Active != false) {
-        size += 1 + 1;
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -165,9 +144,6 @@ namespace Generated {
       if (other.Name.Length != 0) {
         Name = other.Name;
       }
-      if (other.Active != false) {
-        Active = other.Active;
-      }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -181,10 +157,6 @@ namespace Generated {
             break;
           case 10: {
             Name = input.ReadString();
-            break;
-          }
-          case 16: {
-            Active = input.ReadBool();
             break;
           }
         }

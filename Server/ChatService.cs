@@ -3,26 +3,22 @@ using Grpc.Core;
 using System;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 
 namespace Server
 {
-    internal class ChatService : Generated.ChatService.ChatServiceBase , ISubject
+    internal class ChatService : Generated.ChatService.ChatServiceBase
     {
         private static List<ChatRequest> requestMessages = new List<ChatRequest>();
-
-
-        public List<IObserver> observers = new List<IObserver>();
-        public List<LogInRequest> observerslog = new List<LogInRequest>();
-
+        private static List<LogInRequest> observers = new List<LogInRequest>();
 
         public override Task<Close> logIn(LogInRequest request, ServerCallContext context)
         {
             Console.WriteLine("\n--> " + request.Name + " has logged in! <--");
-            observerslog.Add(request);
 
+            observers.Add(request);
             return Task.FromResult(new Close());
         }
-
         public override async Task chatStream(ChatRequest request, IServerStreamWriter<ChatRequest> responseStream, ServerCallContext context)
         {
             foreach (var message in requestMessages)
@@ -30,15 +26,6 @@ namespace Server
                 await responseStream.WriteAsync(message);
             }
         }
-
-        public void Notify()
-        {
-            foreach(IObserver observer in observers)
-            {
-                observer.Update();
-            }
-        }
-
         public override Task<Close> sendMessage(ChatRequest request, ServerCallContext context)
         {
             Console.WriteLine("------------------------------------");
@@ -46,20 +33,11 @@ namespace Server
             Console.WriteLine("------------------------------------");
 
             requestMessages.Add(request);
-            this.Notify();
+            //this.Notify();
 
             return Task.FromResult(new Close());
         }
 
-        public void Subscribe(IObserver observer)
-        {
-            observers.Add(observer);
-        }
-
-        public void Unsubscribe(IObserver observer)
-        {
-            observers.Remove(observer);
-        }
     }
 }
 

@@ -15,7 +15,7 @@
         <TextBox Name ="chatbox" HorizontalAlignment="Left" Height="333" VerticalAlignment="Top" Width="372" Margin="10,50,0,0"/>
         
         <TextBox Name ="txt_name" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="222" Margin="75,17,0,0"/>
-        <TextBox Name ="txt_message" HorizontalAlignment="Left" Height="48" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="222" Margin="75,399,0,0"/>
+        <TextBox Name ="txt_message" HorizontalAlignment="Left" Height="48" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="222" Margin="75,399,0,0" TextChanged="txt_message_TextChanged"/>
         
         <Button Name ="btn_send" Content="Send" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="302,399,0,0" Height="48" Click="btn_send_Click"/>
         <Button Name ="btn_connect" Content="Connect" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="302,17,0,0" Height="23" Click="btn_connect_Click"/>

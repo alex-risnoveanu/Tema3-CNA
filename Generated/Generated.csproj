@@ -70,8 +70,6 @@
     <Compile Include="ChatService.cs" />
     <Compile Include="ChatServiceGrpc.cs" />
     <Compile Include="Close.cs" />
-    <Compile Include="IObserver.cs" />
-    <Compile Include="ISubject.cs" />
     <Compile Include="LogInRequest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

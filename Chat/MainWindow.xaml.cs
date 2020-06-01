@@ -21,7 +21,7 @@ namespace Chat
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window , IObserver
+    public partial class MainWindow : Window
     {
         const string Host = "localhost";
         const int Port = 16842;
@@ -46,8 +46,7 @@ namespace Chat
                 chatbox.ScrollToEnd();
             }), new object[] { message });
         }
-
-        private async Task InitializeChatAsync()
+        private async Task UpdateChat()
         {
             chatbox.Clear();
 
@@ -107,15 +106,18 @@ namespace Chat
                     var chat = new ChatService.ChatServiceClient(channel);
                     chat.sendMessage(clientMessage);
 
-                    InitializeChatAsync();
+                    UpdateChat();
                 }
             }
 
         }
 
-        public void Update()
+        ///------------------> TextBox <------------------//////
+
+        private void txt_message_TextChanged(object sender, TextChangedEventArgs e)
         {
-            InitializeChatAsync();
+            UpdateChat();
         }
+
     }
 }

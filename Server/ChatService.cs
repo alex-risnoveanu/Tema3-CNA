@@ -41,7 +41,7 @@ namespace Server
             Console.WriteLine(request.Name + " send a message!");
             Console.WriteLine("------------------------------------");
 
-            requestMessages.Clear();
+            //requestMessages.Clear();
             requestMessages.Add(request);
             //this.Notify();
 

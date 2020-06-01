@@ -33,7 +33,6 @@ namespace Chat
         ChatRequest clientMessage = new ChatRequest();
 
         bool isConnected = false;
-        bool isUpdateed = FALS;
 
         public MainWindow()
         {
@@ -55,6 +54,8 @@ namespace Chat
         }
         private async Task UpdateChat()
         {
+            chatbox.Clear();
+
             var chat = new ChatService.ChatServiceClient(channel);
             var stream = chat.chatStream(clientMessage);
 
@@ -117,7 +118,6 @@ namespace Chat
                     chat.sendMessage(clientMessage);
 
                     UpdateChat();
-                    isUpdateed = false;
                 }
             }
 
@@ -129,13 +129,9 @@ namespace Chat
         {
             if (isConnected == false)
                 MessageBox.Show("Ups! You forgot to connect!", "Error!");
-            else if (isUpdateed == false)
-            {
+            else 
                 UpdateChat();
-                isUpdateed = true;
-            }
         }
-
 
     }
 }

@@ -15,6 +15,7 @@ namespace Server
             get
             {
                 yield return Generated.ChatService.BindService(new ChatService());
+                yield return Generated.LogInService.BindService(new LogInService());
             }
         }
 

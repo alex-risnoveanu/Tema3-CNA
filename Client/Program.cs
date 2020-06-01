@@ -31,7 +31,7 @@ namespace Client
 
             } while (isValid(client.Name) == false);
 
-            var logIn = new ChatService.ChatServiceClient(channel);
+            var logIn = new LogInService.LogInServiceClient(channel);
             logIn.logIn(client);
 
             Console.WriteLine("Welcome " + client.Name + "!");

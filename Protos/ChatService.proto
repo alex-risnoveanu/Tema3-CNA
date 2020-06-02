@@ -8,6 +8,6 @@ import "ChatResponse.proto";
 option csharp_namespace = "Generated";
 
 service ChatService {
-	rpc chatStream(ChatRequest) returns (stream ChatRequest);
-	rpc sendMessage(ChatRequest) returns (Close);
+	rpc chatStream(stream ChatRequest) returns (stream ChatResponse);
+	rpc sendMessage(ChatRequest) returns (stream ChatRequest);
 }

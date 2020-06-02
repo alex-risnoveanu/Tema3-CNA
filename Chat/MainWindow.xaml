@@ -14,15 +14,16 @@
         <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Name:" VerticalAlignment="Top" Margin="21,17,0,0" RenderTransformOrigin="1.838,-20.195"/>
         <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Message:" VerticalAlignment="Top" Margin="21,400,0,0" RenderTransformOrigin="0.546,1.353"/>
 
-        <TextBox Name ="chatbox" Foreground="Black" HorizontalAlignment="Left" Height="302" VerticalAlignment="Top" Width="372" Margin="10,50,0,0" IsReadOnly="True"/>
+        <TextBlock Name ="chatbox" Foreground="Black" HorizontalAlignment="Left" Height="302" VerticalAlignment="Top" Width="372" Margin="10,50,0,0" />
 
         <TextBox Name ="txt_name" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="237" Margin="60,17,0,0"/>
-        <TextBox Name ="txt_message" HorizontalAlignment="Left" Height="48" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="222" Margin="75,399,0,0" TextChanged="txt_message_TextChanged"/>
+        <TextBox Name ="txt_message" HorizontalAlignment="Left" Height="48" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="222" Margin="75,399,0,0"/>
 
         <Button Name ="btn_send" Content="Send" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="302,399,0,0" Height="48" Click="btn_send_Click"/>
         <Button Name ="btn_connect" Content="Connect" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="302,17,0,0" Height="23" Click="btn_connect_Click"/>
 
         <Label Name ="lb_connectBool" Content="You are Disconnected!" Foreground="Red" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,357,0,0" Width="372"/>
+        <Label Content="Label" HorizontalAlignment="Left" Height="7" Margin="574,94,-182,0" VerticalAlignment="Top" Width="2"/>
 
     </Grid>
 </Window>

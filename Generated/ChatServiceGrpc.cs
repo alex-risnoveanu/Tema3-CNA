@@ -13,14 +13,15 @@ namespace Generated {
     static readonly string __ServiceName = "ChatService";
 
     static readonly grpc::Marshaller<global::Generated.ChatRequest> __Marshaller_ChatRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Generated.ChatRequest.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Generated.ChatResponse> __Marshaller_ChatResponse = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Generated.ChatResponse.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Generated.Close> __Marshaller_Close = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Generated.Close.Parser.ParseFrom);
 
-    static readonly grpc::Method<global::Generated.ChatRequest, global::Generated.ChatRequest> __Method_chatStream = new grpc::Method<global::Generated.ChatRequest, global::Generated.ChatRequest>(
-        grpc::MethodType.ServerStreaming,
+    static readonly grpc::Method<global::Generated.ChatRequest, global::Generated.ChatResponse> __Method_chatStream = new grpc::Method<global::Generated.ChatRequest, global::Generated.ChatResponse>(
+        grpc::MethodType.DuplexStreaming,
         __ServiceName,
         "chatStream",
         __Marshaller_ChatRequest,
-        __Marshaller_ChatRequest);
+        __Marshaller_ChatResponse);
 
     static readonly grpc::Method<global::Generated.ChatRequest, global::Generated.Close> __Method_sendMessage = new grpc::Method<global::Generated.ChatRequest, global::Generated.Close>(
         grpc::MethodType.Unary,
@@ -39,7 +40,7 @@ namespace Generated {
     [grpc::BindServiceMethod(typeof(ChatService), "BindService")]
     public abstract partial class ChatServiceBase
     {
-      public virtual global::System.Threading.Tasks.Task chatStream(global::Generated.ChatRequest request, grpc::IServerStreamWriter<global::Generated.ChatRequest> responseStream, grpc::ServerCallContext context)
+      public virtual global::System.Threading.Tasks.Task chatStream(grpc::IAsyncStreamReader<global::Generated.ChatRequest> requestStream, grpc::IServerStreamWriter<global::Generated.ChatResponse> responseStream, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -74,13 +75,13 @@ namespace Generated {
       {
       }
 
-      public virtual grpc::AsyncServerStreamingCall<global::Generated.ChatRequest> chatStream(global::Generated.ChatRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      public virtual grpc::AsyncDuplexStreamingCall<global::Generated.ChatRequest, global::Generated.ChatResponse> chatStream(grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
-        return chatStream(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+        return chatStream(new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual grpc::AsyncServerStreamingCall<global::Generated.ChatRequest> chatStream(global::Generated.ChatRequest request, grpc::CallOptions options)
+      public virtual grpc::AsyncDuplexStreamingCall<global::Generated.ChatRequest, global::Generated.ChatResponse> chatStream(grpc::CallOptions options)
       {
-        return CallInvoker.AsyncServerStreamingCall(__Method_chatStream, null, options, request);
+        return CallInvoker.AsyncDuplexStreamingCall(__Method_chatStream, null, options);
       }
       public virtual global::Generated.Close sendMessage(global::Generated.ChatRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
@@ -120,7 +121,7 @@ namespace Generated {
     /// <param name="serviceImpl">An object implementing the server-side handling logic.</param>
     public static void BindService(grpc::ServiceBinderBase serviceBinder, ChatServiceBase serviceImpl)
     {
-      serviceBinder.AddMethod(__Method_chatStream, serviceImpl == null ? null : new grpc::ServerStreamingServerMethod<global::Generated.ChatRequest, global::Generated.ChatRequest>(serviceImpl.chatStream));
+      serviceBinder.AddMethod(__Method_chatStream, serviceImpl == null ? null : new grpc::DuplexStreamingServerMethod<global::Generated.ChatRequest, global::Generated.ChatResponse>(serviceImpl.chatStream));
       serviceBinder.AddMethod(__Method_sendMessage, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Generated.ChatRequest, global::Generated.Close>(serviceImpl.sendMessage));
     }
 

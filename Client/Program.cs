@@ -53,7 +53,7 @@ namespace Client
                 var chat = new ChatService.ChatServiceClient(channel);
                 chat.sendMessage(clientMessage);
 
-                var stream = chat.chatStream(clientMessage);
+                var stream = chat.chatStream();
                 while (await stream.ResponseStream.MoveNext())
                 {
                     var serverMessage = stream.ResponseStream.Current;

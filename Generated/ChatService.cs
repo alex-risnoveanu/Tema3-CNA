@@ -25,10 +25,10 @@ namespace Generated {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
             "ChFDaGF0U2VydmljZS5wcm90bxoLQ2xvc2UucHJvdG8aEUNoYXRSZXF1ZXN0",
-            "LnByb3RvGhJDaGF0UmVzcG9uc2UucHJvdG8yXgoLQ2hhdFNlcnZpY2USKgoK",
-            "Y2hhdFN0cmVhbRIMLkNoYXRSZXF1ZXN0GgwuQ2hhdFJlcXVlc3QwARIjCgtz",
-            "ZW5kTWVzc2FnZRIMLkNoYXRSZXF1ZXN0GgYuQ2xvc2VCDKoCCUdlbmVyYXRl",
-            "ZGIGcHJvdG8z"));
+            "LnByb3RvGhJDaGF0UmVzcG9uc2UucHJvdG8yYQoLQ2hhdFNlcnZpY2USLQoK",
+            "Y2hhdFN0cmVhbRIMLkNoYXRSZXF1ZXN0Gg0uQ2hhdFJlc3BvbnNlKAEwARIj",
+            "CgtzZW5kTWVzc2FnZRIMLkNoYXRSZXF1ZXN0GgYuQ2xvc2VCDKoCCUdlbmVy",
+            "YXRlZGIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Generated.CloseReflection.Descriptor, global::Generated.ChatRequestReflection.Descriptor, global::Generated.ChatResponseReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, null));

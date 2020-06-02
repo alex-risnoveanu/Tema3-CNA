@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -32,44 +33,69 @@ namespace Chat
         LogInRequest client = new LogInRequest();
         ChatRequest clientMessage = new ChatRequest();
 
+        private AsyncDuplexStreamingCall<ChatRequest, ChatResponse> stream;
+
         bool isConnected = false;
 
         public MainWindow()
         {
             InitializeComponent();
-        }
 
-        void DataWindow_Closing(object sender, CancelEventArgs e)
-        {
-            var logIn = new LogInService.LogInServiceClient(channel);
-            logIn.logOut(client);
         }
-        private void AppendLineToChatBox(string message)
+        private async void UpdateChat()
         {
-            chatbox.Dispatcher.BeginInvoke(new Action<string>((messageToAdd) =>
-            {
-                chatbox.AppendText(messageToAdd + "\n");
-                chatbox.ScrollToEnd();
-            }), new object[] { message });
-        }
-        private async Task UpdateChat()
-        {
-            chatbox.Clear();
-
             var chat = new ChatService.ChatServiceClient(channel);
-            var stream = chat.chatStream(clientMessage);
 
-            string message;
-
-            while (await stream.ResponseStream.MoveNext())
+            try
             {
-                var serverMessage = stream.ResponseStream.Current;
+                using (stream = chat.chatStream())
+                {
+                    while (await stream.ResponseStream.MoveNext(CancellationToken.None))
+                    {
+                        //var serverMessage = stream.ResponseStream.Current;
 
-                message = serverMessage.Name + " says: " + serverMessage.Textmessage;
+                        //var displayMessage = string.Format("{0}:{1}{2}", serverMessage.Name, serverMessage.Textmessage, Environment.NewLine);
+                        //chatbox.Text += displayMessage;
 
-                AppendLineToChatBox(message);
+                        var serverMessage = stream.ResponseStream.Current;
+                        var otherClientMessage = serverMessage.Textmessage;
+                        var displayMessage = string.Format("{0}:{1}{2}", otherClientMessage.From, otherClientMessage.Message, Environment.NewLine);
+                        chatbox.Text += displayMessage;
+                    }
+                }
+            }
+            catch (RpcException)
+            {
+                stream = null;
+                throw;
             }
         }
+
+        //private void AppendLineToChatBox(string message)
+        //{
+        //    chatbox.Dispatcher.BeginInvoke(new Action<string>((messageToAdd) =>
+        //    {
+        //        chatbox.AppendText(messageToAdd + "\n");
+        //        chatbox.ScrollToEnd();
+        //    }), new object[] { message });
+        //}
+        //private async void UpdateChat()
+        //{
+        //    //var chat = new ChatService.ChatServiceClient(channel);
+
+        //    //var stream = chat.chatStream();
+
+        //    //string message;
+
+        //    //while (await stream.ResponseStream.MoveNext())
+        //    //{
+        //    //    var serverMessage = stream.ResponseStream.Current;
+
+        //    //    message = serverMessage.Name + " says: " + serverMessage.Textmessage;
+
+        //    //    AppendLineToChatBox(message);
+        //    //}
+        //}
 
         ///------------------> Buttons <------------------//////
 
@@ -101,7 +127,7 @@ namespace Chat
                 }
             }
         }
-        private void btn_send_Click(object sender, RoutedEventArgs e)
+        private async void btn_send_Click(object sender, RoutedEventArgs e)
         {
             if (isConnected == false)
                 MessageBox.Show("Ups! You forgot to connect!", "Error!");
@@ -118,6 +144,11 @@ namespace Chat
                     chat.sendMessage(clientMessage);
 
                     UpdateChat();
+
+                    if (stream != null)
+                    {
+                        await stream.RequestStream.WriteAsync(clientMessage);
+                    }
                 }
             }
 
@@ -125,13 +156,19 @@ namespace Chat
 
         ///------------------> Utils <------------------//////
 
-        private void txt_message_TextChanged(object sender, TextChangedEventArgs e)
+        void DataWindow_Closing(object sender, CancelEventArgs e)
         {
-            if (isConnected == false)
-                MessageBox.Show("Ups! You forgot to connect!", "Error!");
-            else 
-                UpdateChat();
+            var logIn = new LogInService.LogInServiceClient(channel);
+            logIn.logOut(client);
         }
+
+        //private void txt_message_TextChanged(object sender, TextChangedEventArgs e)
+        //{
+        //    //if (isConnected == false)
+        //    //    MessageBox.Show("Ups! You forgot to connect!", "Error!");
+        //    //else 
+        //    //    UpdateChat();
+        //}
 
     }
 }
